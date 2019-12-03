@@ -29,10 +29,14 @@ private List <Commande> listeCommande;
 
 
 
+	
+
+
 	@Override
 	public String toString() {
 		return "Fournisseur [numFournisseur=" + numFournisseur + ", estClient=" + estClient + ", estFournisseur="
-				+ estFournisseur + ", listeAchat=" + listeAchat + ", toString()=" + super.toString() + "]";
+				+ estFournisseur + ", listeAchat=" + listeAchat + ", listeCommande=" + listeCommande + ", toString()="
+				+ super.toString() + "]";
 	}
 
 

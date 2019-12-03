@@ -14,12 +14,15 @@ import projetPOO01.GestionPersonnes.Personne;
 import projetPOO01.GestionPersonnes.Salarie;
 import projetPOO01.GestionPersonnes.Exceptions.ErreurSaisie;
 import projetPOO01.GestionsCommandes.Achat;
+import projetPOO01.GestionsCommandes.Commande;
 
 public class Programme {
 	static Scanner s1 = new Scanner(System.in);
 	static List<Personne> lc = new ArrayList<Personne>();
 	static List<Achat> la = new ArrayList<Achat>();
 	static List <IClient> ic = new ArrayList();
+	static List <IFournisseur> iff;
+	static List<Commande> lco = new ArrayList<Commande>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -479,8 +482,103 @@ public class Programme {
 			if (c instanceof IFournisseur && ((IFournisseur) c).estFournisseur()==true)
 			{
 			System.out.println(c+ "n° " + compteur);
+			iff.add((IFournisseur) c);
 			}
 		}
+		int num1=0;
+		String num="";
+		String dat="";
+		String descr="";
+		String qt = "";
+		
+		boolean ok=false;
+		boolean reussi = false;
+		while (ok==false)
+		{
+			
+		
+		while(reussi==false)
+		{
+			System.out.println("Quel fournisseur souhaite commander");
+			 num = s1.nextLine();	
+			try {
+		
+				Programme.ctrlInt(num);
+				 num1 = Integer.parseInt(num)-1;
+				
+				reussi=true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+			reussi=false;
+			System.out.println("erreur de saisie");
+			}
+		}
+		
+		reussi=false;
+		while(reussi==false)
+		{
+		System.out.println("Date de la commande");
+		 dat = s1.nextLine();
+		 try {
+			Programme.ctrlDate(dat);
+			reussi=true;
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			reussi=false;
+			System.out.println("erreur de saisie sur ladate");
+		}
+		 
+		}
+		System.out.println("Description de la commande");
+		 descr = s1.nextLine();
+		
+
+		 reussi = false;
+		while(reussi==false)
+		{
+			System.out.println("Quantité demandée");
+			 qt = s1.nextLine();
+			
+
+			try {
+		
+				Programme.ctrlInt(qt);
+				reussi=true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				try {
+					throw new Exception("");
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+				}	
+
+			reussi=false;
+			System.out.println("erreur de saisie");
+			}
+		}
+		Commande maCommande= new Commande (dat, descr, Integer.parseInt(qt));
+		lco.add(maCommande);
+
+		System.out.println("Souhaitez vous faire un autre commande: tapez non si vous ne voulez pas");
+		String rep = s1.nextLine();
+		{
+			if (rep.equals("non"))
+			{
+				ok=true;
+			}
+		
+		}
+		}
+		
+		
+		iff.get(num1).commander(lco);
+		iff.get(num1).livrer();
+		for(Commande c:lco)
+		{
+			System.out.println(c);
+		}
+		
+		
 	}
 	public static void listeSalaries()
 	{
