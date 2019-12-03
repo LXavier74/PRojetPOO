@@ -36,7 +36,7 @@ public class Patron extends Salarie implements IPatron {
 		for(Personne c: lc)
 		{
 		
-			if (lc.contains(c))
+			if (c instanceof Patron)
 			{
 			lc.remove(c);
 			return;

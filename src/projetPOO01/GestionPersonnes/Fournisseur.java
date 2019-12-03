@@ -11,6 +11,13 @@ private String numFournisseur;
 private boolean estClient;
 private boolean estFournisseur=true;
 private List<Achat> listeAchat;
+private List <Commande> listeCommande;
+
+	public List<Commande> getListeCommande() {
+	return listeCommande;
+}
+
+
 
 	public Fournisseur(String nom, String prenom, String adresse, String ville, String codePostal, String numFournisseur, boolean estClient) {
 		super(nom, prenom, adresse, ville, codePostal);
@@ -18,6 +25,14 @@ private List<Achat> listeAchat;
 		this.estClient = estClient;
 
 		// TODO Auto-generated constructor stub
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Fournisseur [numFournisseur=" + numFournisseur + ", estClient=" + estClient + ", estFournisseur="
+				+ estFournisseur + ", listeAchat=" + listeAchat + ", toString()=" + super.toString() + "]";
 	}
 
 

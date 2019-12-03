@@ -17,6 +17,7 @@ public class Salarie extends Personne implements IClient {
 		super(nom, prenom, adresse, ville, codePostal);
 		this.numSecu = numSecu;
 		this.salaire = salaire;
+		this.estClient = estClient;
 		// TODO Auto-generated constructor stub
 	}
 

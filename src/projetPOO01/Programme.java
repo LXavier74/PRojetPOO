@@ -1,5 +1,7 @@
 package projetPOO01;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import projetPOO01.GestionPersonnes.Client;
@@ -16,6 +18,8 @@ import projetPOO01.GestionsCommandes.Achat;
 public class Programme {
 	static Scanner s1 = new Scanner(System.in);
 	static List<Personne> lc = new ArrayList<Personne>();
+	static List<Achat> la = new ArrayList<Achat>();
+	static List <IClient> ic = new ArrayList();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -340,30 +344,130 @@ public class Programme {
 	{
 		System.out.println("Vous voulez la liste des clients");
 		int compteur=0;
+		int num1=0;
+		String num="";
+		String dat="";
+		String descr="";
+		String qt = "";
 		for(Personne c:lc)
 		{
 			if (c instanceof IClient && ((IClient) c).estClient()==true)
 			{
 				compteur++;
 			System.out.println(c + "n° " + compteur);
+			ic.add((IClient) c);
 			}
-			System.out.println("Quel client souhaite faire des achats");
-			int num = s1.nextInt();
-			System.out.println("Description de l'achat");
-			String descr = s1.nextLine();
-			System.out.println("Quantité demandée");
-			int qt = s1.nextInt();
-			Achat monAchat = new Achat (descr, qt);
-			List<Achat> la = new ArrayList<Achat>();
-			la.add(monAchat);
-			
-			IClient client = (IClient)c;
-			client.achete(la);
 		}
-	
+			boolean ok=false;
+			boolean reussi = false;
+			while (ok==false)
+			{
+				
+			
+			while(reussi==false)
+			{
+				System.out.println("Quel client souhaite faire des achats");
+				 num = s1.nextLine();	
+				try {
+			
+					Programme.ctrlInt(num);
+					 num1 = Integer.parseInt(num)-1;
+					
+					reussi=true;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+				reussi=false;
+				System.out.println("erreur de saisie");
+				}
+			}
+			
+			reussi=false;
+			while(reussi==false)
+			{
+			System.out.println("Date de l'achat");
+			 dat = s1.nextLine();
+			 try {
+				Programme.ctrlDate(dat);
+				reussi=true;
+			} catch (ParseException e2) {
+				// TODO Auto-generated catch block
+				reussi=false;
+				System.out.println("erreur de saisie sur ladate");
+			}
+			 
+			}
+			System.out.println("Description de l'achat");
+			 descr = s1.nextLine();
+			
+
+			 reussi = false;
+			while(reussi==false)
+			{
+				System.out.println("Quantité demandée");
+				 qt = s1.nextLine();
+				
+
+				try {
+			
+					Programme.ctrlInt(qt);
+					reussi=true;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					try {
+						throw new Exception("");
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+					}	
+
+				reussi=false;
+				System.out.println("erreur de saisie");
+				}
+			}
+			Achat monAchat = new Achat (dat, descr, Integer.parseInt(qt));
+			la.add(monAchat);
+
+			System.out.println("Souhaitez vous faire un autre achat: tapez non si vous ne voulez pas");
+			String rep = s1.nextLine();
+			{
+				if (rep.equals("non"))
+				{
+					ok=true;
+				}
+			
+			}
+			}
+			
+		
+				
+			
+			
+			ic.get(num1).achete(la);
+			ic.get(num1).paie();
+			for(Achat a:la)
+			{
+				System.out.println(a);
+			}
+		
 		
 
+	}
 	
+	public static void ctrlInt(String s) throws ParseException
+	{
+		
+		
+		Integer.parseInt(s);
+
+	}
+	
+	public static void ctrlDate(String s) throws ParseException
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat () ;
+        sdf.applyPattern("dd/MM/yyyy") ;
+        sdf.setLenient(false) ;      
+        sdf.parse(s) ;
+        
+		
 	}
 	public static void listeFournisseurs()
 	{
