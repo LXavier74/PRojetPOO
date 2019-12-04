@@ -10,6 +10,7 @@ public class Salarie extends Personne implements IClient {
 	private String numSecu;
 	private String salaire;
 	private boolean estClient;
+	 private List <Achat> achats;
 
 
 	public Salarie(String nom, String prenom, String adresse, String ville, String codePostal, String numSecu,
@@ -28,6 +29,7 @@ public class Salarie extends Personne implements IClient {
 	@Override
 	public void paie() {
 		// TODO Auto-generated method stub
+		System.out.println("Salarie paie");
 
 	}
 
@@ -51,6 +53,7 @@ public class Salarie extends Personne implements IClient {
 	@Override
 	public void achete(List<Achat> achat) {
 		// TODO Auto-generated method stub
+		this.achats = achat;
 		
 	}
 
@@ -62,17 +65,32 @@ public class Salarie extends Personne implements IClient {
 			if (c instanceof Salarie)
 			{
 				if (ns.equals(((Salarie)c).getNumSecu())) throw new ErreurSaisie("Ce numéro existe déja");
-			}
-			
+
+			}			
 		}
 	}
+	public static void SecuNombre(String ns) throws Exception
+	{
+		if (ns.length()!=13)
+		{
+			 throw new ErreurSaisie("il en faut 13");
+		}
 
+	}
 
 
 	@Override
 	public boolean estClient() {
 		
 		return this.estClient;
+	}
+
+
+
+
+
+	public List <Achat> getAchats() {
+		return achats;
 	}
 
 

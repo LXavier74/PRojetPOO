@@ -1,5 +1,9 @@
 package projetPOO01.GestionPersonnes;
 
+import java.util.List;
+
+import projetPOO01.GestionPersonnes.Exceptions.ErreurSaisie;
+
 public class Personne {
 
 	private String nom;
@@ -75,7 +79,18 @@ public class Personne {
 		return this.getClass().getSimpleName()+"Personne [nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", ville=" + ville
 				+ ", codePostal=" + codePostal + "]";
 	}
-
+	
+	
+	public static void testCP(String cp) throws ErreurSaisie
+	{
+		
+			if (cp.length() != 5 || !cp.matches("\\d{1,9}"))
+			{
+				throw new ErreurSaisie("Le format n'est pas correct");
+			}
+			
+		
+	}
 
 
 }

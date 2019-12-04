@@ -122,33 +122,47 @@ public class Programme {
 		String adresseCli = s1.nextLine();
 		System.out.println("Quel est votre ville ?");
 		String villeCli = s1.nextLine();
-		System.out.println("Quel est votre code postal ?");
-		String cpCli = s1.nextLine();
-	
-		
-		System.out.println("Quel est votre numero client ?");
-		String numCli = "";
 		
 		boolean reussi = false;
+		String cpCli ="";
 		while(reussi==false)
 		{
-		do {
+		System.out.println("Quel est votre code postal ?");
+		cpCli = s1.nextLine();
+		try {
+			Client.testCP(cpCli);
+			reussi=true;
+		} catch (ErreurSaisie e) {
+			// TODO Auto-generated catch block
+			System.out.println("erreur de saisie");
+		}
+		}
+		
+		String numCli = "";
+		
+		reussi=false;
+		while(reussi==false)
+		{
+			System.out.println("Quel est votre numero client ?");
+
 			numCli = s1.nextLine();
-			if (!numCli.matches("\\d{1,9}")) {
-				System.out.println("Rentrez un format correct");
-			}
-			else {
+	
+			
 				try {
 					Client.UniqueCli(numCli, lc);
-					reussi=true;
+					try {
+						Programme.ctrlInt(numCli);
+						reussi=true;
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						System.out.println("Il faut des nombres");
+
+					}
 				} catch (ErreurSaisie e) {
 					// TODO Auto-generated catch block
 					System.out.println("Ce numéro existe déja");
 					
 				}
-			}
-		}
-			while (!numCli.matches("\\d{1,9}") && reussi==false);
 		}
 		System.out.println("Etes vous un fournisseur true/false ?");
 		Boolean estFournisseur = s1.nextBoolean();
@@ -242,29 +256,24 @@ public class Programme {
 		String villeSal = s1.nextLine();
 		System.out.println("Quel est votre code postal ?");
 		String cpSal = s1.nextLine();
-		System.out.println("Quel est votre numero de secu ?");
 		String numSecu="";
 
 		boolean reussi = false;
 		while(reussi==false)
 		{
-		do {
+			System.out.println("Quel est votre numero de secu ?");
 			numSecu = s1.nextLine();
-			if (!numSecu.matches("\\d{13}")) {
-				System.out.println("Rentrez un format correct");
-			}
-			else {
+		
+			
 				try {
 					Salarie.UniqueSecu(numSecu, lc);
-					reussi=true;
 				} catch (ErreurSaisie e) {
 					// TODO Auto-generated catch block
 					System.out.println("Ce numéro existe déja");
 					
 				}
-			}
-		}
-			while (!numSecu.matches("\\d{13}") && reussi==false);
+			
+		
 		}
 		System.out.println("Quel est votre salaire ?");
 		String salaire;
