@@ -88,8 +88,8 @@ private List <Commande> listeCommande;
 
 
 	@Override
-	public void commander(List<Commande> achat) {
-		// TODO Auto-generated method stub
+	public void commander(List<Commande> commande) {
+	listeCommande=commande;
 		
 	}
 

@@ -10,7 +10,7 @@ public class Achat {
 
 	private Date date;
 	private String intitule;
-	private int qte;
+	private String qte;
 	String pattern = "dd/MM/yyyy";
 	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, new Locale("fr", "FR"));
 
@@ -26,10 +26,10 @@ public class Achat {
 		return "Achat [date=" + date + ", intitule=" + intitule + ", qte=" + qte + ","
 				+ "]";
 	}
-	public int getQte() {
+	public String getQte() {
 		return qte;
 	}
-	public Achat(String date, String intitule, int qte) {
+	public Achat(String date, String intitule, String qte) {
 		super();
 		try {
 			this.date =  simpleDateFormat.parse(date);

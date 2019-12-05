@@ -27,7 +27,7 @@ public class TestFournisseur {
 
 	private final String odate= "20/12/2012";
 	private final String odesc= "Achat d'un iphone";
-	private final int oqt= 11;
+	private final String oqt= "11";
 
 	@Before
 public void init()

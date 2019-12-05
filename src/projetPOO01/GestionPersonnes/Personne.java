@@ -4,6 +4,13 @@ import java.util.List;
 
 import projetPOO01.GestionPersonnes.Exceptions.ErreurSaisie;
 
+/**
+ * 
+ * @author Xavier LA
+ * @version 1.0
+ * <b> Javadoc pour la POE de Lyon </b>
+ *
+ */
 public class Personne {
 
 	private String nom;
@@ -13,14 +20,25 @@ public class Personne {
 	private String codePostal;
 	
 	
+	/**
+	 * Accesseur de nom
+	 * @return nom de la personne
+	 */
 	public String getNom() {
 		return nom;
 	}
 
+/**
+ * Mutateur de nom
+ * @param nom : nouveau nom de la personne
+ */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
+	/**
+	 * Accesseur de prénom
+	 * @return prénom de la personne
+	 */
 	public String getPrenom() {
 		return prenom;
 	}
@@ -52,18 +70,15 @@ public class Personne {
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
-/*
-	public Personne() {
-		// TODO Auto-generated constructor stub
-		 this.adresse="";
-		this.codePostal="";
-		this.nom="";
-		this.prenom="";
-		this.ville="";
-		this.codePostal=""; 
-		this("","","","","");
-	}
-*/
+
+	/**
+	 * 
+	 * @param nom : nom de la personne
+	 * @param prenom : prénom de la personne
+	 * @param adresse : adresse de la personne
+	 * @param ville : ville dans laquelle la personne habite
+	 * @param codePostal : code postal de la personne
+	 */
 	public Personne(String nom, String prenom, String adresse, String ville, String codePostal) {
 		super();
 		this.nom = nom;
@@ -84,13 +99,17 @@ public class Personne {
 	public static void testCP(String cp) throws ErreurSaisie
 	{
 		
-			if (cp.length() != 5 || !cp.matches("\\d{1,9}"))
+			if (cp.length()!=5)
 			{
-				throw new ErreurSaisie("Le format n'est pas correct");
+				throw new ErreurSaisie("Il faut 5 caractères");
 			}
+			if (!cp.matches("\\d{1,9}"))
+			{
+				throw new ErreurSaisie("Il ne faut que des chiffres");
+			}
+			
 			
 		
 	}
-
 
 }

@@ -11,7 +11,8 @@ public class Client extends Personne implements IFournisseur, IClient {
  private boolean estClient=true;
  private boolean estFournisseur;
  private List <Achat> achats;
- 	
+ private List <Commande> listeCommande;
+
 	public Client(String nom, String prenom, String adresse, String ville, String codePostal,String numClient, boolean estFournisseur) {
 		super(nom, prenom, adresse, ville, codePostal);
 		this.numClient = numClient;
@@ -50,10 +51,12 @@ public class Client extends Personne implements IFournisseur, IClient {
 
 
 
+
+
 	@Override
 	public String toString() {
 		return "Client [numClient=" + numClient + ", estClient=" + estClient + ", estFournisseur=" + estFournisseur
-				+ ", achats=" + achats + ", toString()=" + super.toString() + "]";
+				+ ", achats=" + achats + ", listeCommande=" + listeCommande + ", toString()=" + super.toString() + "]";
 	}
 
 
@@ -79,9 +82,10 @@ public class Client extends Personne implements IFournisseur, IClient {
 
 
 	@Override
-	public void commander(List<Commande> achat) {
+	public void commander(List<Commande> commande) {
 		// TODO Auto-generated method stub
-		
+		listeCommande=commande;
+
 	}
 
 
@@ -96,6 +100,11 @@ public class Client extends Personne implements IFournisseur, IClient {
 	public void achete(List<Achat> achat) {
 		// TODO Auto-generated method stub
 	this.achats = achat;
+	}
+
+
+	public List <Commande> getListeCommande() {
+		return listeCommande;
 	}		
 	
 

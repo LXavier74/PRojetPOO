@@ -73,11 +73,23 @@ public class Salarie extends Personne implements IClient {
 	{
 		if (ns.length()!=13)
 		{
-			 throw new ErreurSaisie("il en faut 13");
+			 throw new ErreurSaisie("il faut 13 caractères");
 		}
 
 	}
 
+	public static void SecuNombreFormat(String ns) throws Exception
+	{
+		try {
+		Double.parseDouble(ns);
+		}
+		catch (Exception e)
+		{
+			 throw new Exception("Il faut des chiffres");
+
+		}
+
+	}
 
 	@Override
 	public boolean estClient() {
