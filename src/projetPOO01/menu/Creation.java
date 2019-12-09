@@ -26,7 +26,6 @@ public class Creation {
 	static String ville ="";
 	static String cp ="";
 	public static List<Personne> lc = new ArrayList<Personne>();
-	public static List <IFournisseur> iff= new ArrayList();;
 	public	static List<Commande> lco = new ArrayList<Commande>();
 
 	
@@ -35,6 +34,7 @@ public class Creation {
 	
 	public static void afficheGeneral()
 	{
+		s1.nextLine();
 		System.out.println("Quel est votre nom ?");
 		 nom = s1.nextLine();
 		System.out.println("Quel est votre prénom ?");
@@ -58,7 +58,6 @@ public class Creation {
 			System.out.println("erreur de saisie");
 		}
 		}
-		
 	}
 	
 	
@@ -98,7 +97,8 @@ public class Creation {
 		Personne monCli= new Client(nom, prenom , adresse,ville,cp,numCli, estFournisseur);
 		System.out.println(monCli.toString());
 		lc.add(monCli);
-		
+		AffichageSelection.debut();
+
 		}
 	
 	
@@ -137,6 +137,7 @@ public class Creation {
 		System.out.println(monFour.toString());
 		
 	lc.add(monFour);
+	AffichageSelection.debut();
 	}
 	
 	public static void creerSalarie()
@@ -185,6 +186,8 @@ public class Creation {
 		System.out.println(monSal.toString());
 		
 		lc.add(monSal);
+		AffichageSelection.debut();
+
 	}
 	
 	public static void creerPatron()
@@ -231,5 +234,7 @@ public class Creation {
 		System.out.println(monPatr.toString());			
 		Patron.PatronExiste(lc);
 		lc.add((Patron)monPatr);
+		AffichageSelection.debut();
+
 	}
 }

@@ -1,62 +1,55 @@
 package projetPOO01.menu;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Stream;
+
+import projetPOO01.GestionPersonnes.IClient;
+import projetPOO01.GestionPersonnes.IFournisseur;
+import projetPOO01.GestionPersonnes.Patron;
+import projetPOO01.GestionPersonnes.Personne;
+import projetPOO01.GestionPersonnes.Salarie;
+
 public class AffichageSelection {
+	private static String choix = null;
 
 	public static void debut(){
-		boolean arret=false;
 
-		while (arret==false)
+		
+			Map<String, IExecute> im1 = new HashMap<String,IExecute>();
+
+			/*
+			im1.put("0 pour créer des données",AffichageMenu::menuCreation);
+			im1.put("1 pour afficher des données",Creation::creerClient);
+*/
 			
-		{
-		System.out.println("1 = client , 2 = fournisseur, 3 = salarie, 4 = liste client, 5 = liste fournisseur, 6 = liste salarie, 7 = liste générale");
+			im1.put("0 pour créer un client",Creation::creerClient);
+			im1.put("1 pour créer un fournisseur",Creation::creerFournisseur);
+			im1.put("2 pour créer un salarié",Creation::creerSalarie);
+			im1.put("3 pour une liste des clients",()->AffichageListe.listeGenerale(Creation.lc.stream().filter(item -> item instanceof IClient), "Clients"));
+			im1.put("4 pour une liste des fournisseurs",()->AffichageListe.listeGenerale(Creation.lc.stream().filter(item -> item instanceof IFournisseur), "Fournisseurs"));
+			im1.put("5 pour une liste des salariés",()->AffichageListe.listeGenerale(Creation.lc.stream().filter(item -> item instanceof Salarie), "Salaries"));
+			im1.put("6 pour une liste des générale",()->AffichageListe.listeGenerale(Creation.lc.stream().filter(item -> item instanceof Personne), "tout le monde"));
+			im1.put("7 pour créer un patron",Creation::creerPatron);
+			im1.put("8 pour voir le patron",()->AffichageListe.listeGenerale(Creation.lc.stream().filter(item -> item instanceof Patron), "sur le patron"));
+			im1.put("9 pour quitter",AffichageSelection::quitter);
 
-
-		System.out.println("Que voulez vous ajouter ?");
-		String choix = Creation.s1.nextLine();
-		switch (choix) {
-		  case "1":
-			  Creation.creerClient();
-				break;
-		  case "2":
-			  Creation.creerFournisseur();
-				  break;
-		  case "3": 
-			Creation.creerSalarie();
-				  break;
-		  case "4":
-			AffichageListe.listeClients();
-				  break;
-		  case "5":
-			  AffichageListe.listeFournisseurs();
-				  break;
-		  case "6":
-			  AffichageListe.listeSalaries();
-				  break;
-		  case "7":
-				AffichageListe.listeGenerale();
-				  break;
-		  case "8":
-				Creation.creerPatron();
-				  break;
-		  case "9":
-				AffichageListe.patron();
-				  break;
-		  default:
-				System.out.println("Vous avez fait une erreur");
-				break;
-		}
-		System.out.println("Vous voulez arrêter");	
+			
+			im1.keySet().stream().sorted().forEach(System.out::println);
+			
+			while(true) {
+			
+			choix = Creation.s1.next();
+			
+			im1.entrySet().stream().filter(e->e.getKey().charAt(0) == choix.charAt(0)).
+			forEach(e->e.getValue().apply());
+						
+			}
 		
-		String arr = Creation.s1.nextLine();
-		
-		if(arr.equals("oui"))
-		{
-			arret=true;
-		}
-		
-		
-		}
-		
-		System.out.println("ARRET");
+	}
+	public static void quitter()
+	{
+		System.out.println("Au revoir");
+		System.exit(0);
 	}
 }

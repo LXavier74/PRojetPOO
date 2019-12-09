@@ -45,16 +45,9 @@ public class Client extends Personne implements IFournisseur, IClient {
 		return numClient;
 	}
 
-
-
-
-
-
-
-
-
 	@Override
 	public String toString() {
+		
 		return "Client [numClient=" + numClient + ", estClient=" + estClient + ", estFournisseur=" + estFournisseur
 				+ ", achats=" + achats + ", listeCommande=" + listeCommande + ", toString()=" + super.toString() + "]";
 	}
